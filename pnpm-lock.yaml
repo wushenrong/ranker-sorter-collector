@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@zod/mini':
-        specifier: 4.0.0-beta.20250418T202744
-        version: 4.0.0-beta.20250418T202744
+        specifier: 4.0.0-beta.20250420T053007
+        version: 4.0.0-beta.20250420T053007
       mathjs:
         specifier: ^14.4.0
         version: 14.4.0
@@ -713,11 +713,11 @@ packages:
     peerDependencies:
       vite: ^4 || ^5 || ^6
 
-  '@zod/core@0.8.0':
-    resolution: {integrity: sha512-c93EH8NXxc08ATS+yuDfjrHVsUi6KNcAM+JE8UZuZsfJuYraP+pg7WhurS/CwDB3FG2NuTpXnozyRpwAHItFhA==}
+  '@zod/core@0.8.1':
+    resolution: {integrity: sha512-djj8hPhxIHcG8ptxITaw/Bout5HJZ9NyRbKr95Eilqwt9R0kvITwUQGDU+n+MVdsBIka5KwztmZSLti22F+P0A==}
 
-  '@zod/mini@4.0.0-beta.20250418T202744':
-    resolution: {integrity: sha512-uIlQDiYTpq1L9VzwT4rTU5TskAsMIcE0LUMSAbQ6uGW60YDZc0AEFNggBNFJ9qZd8S9qaeUoZxsLDs76xYUdRg==}
+  '@zod/mini@4.0.0-beta.20250420T053007':
+    resolution: {integrity: sha512-PnQwkzlUbUj6A2GKbqhskH/v58m2WfmP+dbXevzzMdvVA7H/KNao37YWhHOTjBzf+xykCXNoLwfwnPMIsU0hOA==}
 
   autoprefixer@10.4.21:
     resolution: {integrity: sha512-O+A6LWV5LDHSJD3LjHYoNi4VLsj/Whi7k6zG12xTYaU4cQ8oxQGckXNX8cRHK5yOZ/ppVHe0ZBXGzSV9jXdVbQ==}
@@ -1646,11 +1646,11 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@zod/core@0.8.0': {}
+  '@zod/core@0.8.1': {}
 
-  '@zod/mini@4.0.0-beta.20250418T202744':
+  '@zod/mini@4.0.0-beta.20250420T053007':
     dependencies:
-      '@zod/core': 0.8.0
+      '@zod/core': 0.8.1
 
   autoprefixer@10.4.21(postcss@8.5.3):
     dependencies:
