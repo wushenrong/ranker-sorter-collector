@@ -21,10 +21,14 @@ const router = createBrowserRouter(
       lazy: () => import('./routes/creator'),
     },
     {
+      ErrorBoundary,
+      HydrateFallback,
       lazy: () => import('./routes/ranker'),
       path: '/ranker',
     },
     {
+      ErrorBoundary,
+      HydrateFallback,
       lazy: () => import('./routes/results'),
       path: '/results',
     },
