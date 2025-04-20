@@ -46,8 +46,8 @@ importers:
         specifier: ^10.1.6
         version: 10.1.6(postcss@8.5.3)
       typescript:
-        specifier: ~5.7.2
-        version: 5.7.3
+        specifier: ~5.8.3
+        version: 5.8.3
       vite:
         specifier: ^6.3.2
         version: 6.3.2
@@ -56,7 +56,7 @@ importers:
         version: 0.19.0
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(typescript@5.7.3)(vite@6.3.2)
+        version: 5.1.4(typescript@5.8.3)(vite@6.3.2)
 
 packages:
 
@@ -1081,8 +1081,8 @@ packages:
     resolution: {integrity: sha512-EGjWssW7Tsk4DGfE+5yluuljS1OGYWiI1J6e8puZz9nTMM51Oug8CD5Zo4gWMsOhq5BI+1bF+rWTm4Vbj3ivRA==}
     engines: {node: '>= 18'}
 
-  typescript@5.7.3:
-    resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2062,15 +2062,15 @@ snapshots:
       fdir: 6.4.4(picomatch@4.0.2)
       picomatch: 4.0.2
 
-  tsconfck@3.1.5(typescript@5.7.3):
+  tsconfck@3.1.5(typescript@5.8.3):
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
 
   turbo-stream@2.4.0: {}
 
   typed-function@4.2.1: {}
 
-  typescript@5.7.3: {}
+  typescript@5.8.3: {}
 
   update-browserslist-db@1.1.3(browserslist@4.24.4):
     dependencies:
@@ -2082,11 +2082,11 @@ snapshots:
 
   vite-bundle-analyzer@0.19.0: {}
 
-  vite-tsconfig-paths@5.1.4(typescript@5.7.3)(vite@6.3.2):
+  vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@6.3.2):
     dependencies:
       debug: 4.4.0
       globrex: 0.1.2
-      tsconfck: 3.1.5(typescript@5.7.3)
+      tsconfck: 3.1.5(typescript@5.8.3)
     optionalDependencies:
       vite: 6.3.2
     transitivePeerDependencies:
