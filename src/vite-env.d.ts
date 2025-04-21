@@ -11,7 +11,7 @@ interface ViteTypeOptions {
 }
 
 interface ImportMetaEnv {
-  readonly VITE_APPS_SCRIPT_ENDPOINT: string
+  readonly VITE_DATABASE_ENDPOINT: string
 }
 
 interface ImportMeta {

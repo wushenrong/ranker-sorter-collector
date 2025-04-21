@@ -56,7 +56,7 @@ export function Results() {
 
     setSendState('sending')
 
-    const response = await fetch(import.meta.env.VITE_APPS_SCRIPT_ENDPOINT, {
+    const response = await fetch(import.meta.env.VITE_DATABASE_ENDPOINT, {
       body: JSON.stringify(actionResponse),
       headers: {
         'Content-Type': 'text/plain;charset=utf-8',
