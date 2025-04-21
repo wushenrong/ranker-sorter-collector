@@ -188,8 +188,8 @@ export function Ranker() {
           <p role="alert">
             You have completed the ranker, on the next page you will have a
             chance to submit, view, and save your results. Remember, do not
-            reload your browser as the ranker does not store any store any
-            information on your computer.
+            reload your browser as the ranker does not store any information on
+            your computer.
           </p>
           <button onClick={viewResults} type="button">
             View Results
