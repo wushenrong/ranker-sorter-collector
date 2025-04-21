@@ -4,25 +4,33 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { Form } from 'react-router'
+import { useSubmit } from 'react-router'
 
-export function Component() {
+import exampleRanker from '~/example-ranker.json'
+
+export function Creator() {
+  const submit = useSubmit()
+
+  const startRanker = () => {
+    submit(JSON.stringify(exampleRanker), {
+      action: '/ranker',
+      encType: 'application/json',
+      method: 'post',
+      replace: true,
+    })
+  }
+
   return (
-    <Form
-      action="/ranker"
-      className="ranker-creation"
-      encType="multipart/form-data"
-      method="post"
-      replace={true}
-    >
-      <fieldset>
-        <legend>Load a custom ranker</legend>
-        <label>
-          Create custom ranker from JSON file:{' '}
-          <input accept="application/json" name="custom-ranker" type="file" />
-        </label>
-      </fieldset>
-      <button type="submit">Create Ranker</button>
-    </Form>
+    <>
+      <p>
+        Once you begin, you have to finish the ranker to see and submit the
+        results. This site <strong>does not</strong> save any data on your
+        computer. Do not reload the browser while completing the ranker. Do not
+        forget to save your results after completing the ranker!
+      </p>
+      <button onClick={startRanker} type="button">
+        Start Ranker
+      </button>
+    </>
   )
 }

@@ -10,7 +10,7 @@ import { defineConfig } from 'vite'
 import tsConfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
-  base: '/ranker-sorter/',
+  base: '/ranker-sorter-collector/',
   css: {
     postcss: {
       plugins: [postcssPresetEnv({ minimumVendorImplementations: 2 })],

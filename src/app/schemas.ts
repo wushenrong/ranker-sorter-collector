@@ -51,14 +51,15 @@ export const rankerResults = zod.extend(customRanker, {
   players: zod.array(zod.extend(player, ratings)),
 })
 
-export const creationForm = zod.interface({
-  'custom-ranker': zod
-    .file()
-    .check(
-      zod.minSize(1, 'Must select a file'),
-      zod.mime(['application/json'], 'Must be a JSON file'),
-    ),
-})
+export const endpointResponse = zod.union([
+  zod.interface({
+    result: zod.literal('success'),
+  }),
+  zod.interface({
+    error: zod.string(),
+    result: zod.literal('error'),
+  }),
+])
 
 export type Player = zod.infer<typeof player> | string
 export type Ratings = zod.infer<typeof ratings>

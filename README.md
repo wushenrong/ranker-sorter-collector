@@ -1,6 +1,7 @@
-# Ranker Sorter
+# Ranker Sorter Collector
 
-Yet another ranker that sorts using ELO.
+[Ranker Sorter](https://github.com/wushenrong/ranker-sorter) but with the
+ability to send results to Google Sheets.
 
 ## Getting Started
 

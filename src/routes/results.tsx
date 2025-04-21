@@ -4,41 +4,39 @@
  * SPDX-License-Identifier: MIT
  */
 
-import * as zod from '@zod/mini'
-import { ActionFunctionArgs, Link, useActionData } from 'react-router'
+import { useState } from 'react'
+import { Link, useActionData } from 'react-router'
 
-import { rankerResults } from '~/schemas'
+import { resultsAction } from '~/actions'
+import { endpointResponse } from '~/schemas'
+
+type SendState = 'unsent' | 'error' | 'sent'
+
+const APPS_SCRIPT_ENDPOINT =
+  'https://script.google.com/macros/s/AKfycbwmOAgr96l3z7_mQOdCor048W8Ets9JtHQGDixBXR_PdXnqlaVkarx-L3GpGtCPGJFc/exec'
 
 const TABLE_HEADINGS = [
-  'Rank',
   'Player',
+  'Rank',
   'Elo',
   'Wins',
   'Losses',
   'Draws',
 ] as const
 
-export async function action({ request }: ActionFunctionArgs) {
-  const rankerResultsData = await request.json()
-  const result = rankerResults.safeParse(rankerResultsData)
+export function Results() {
+  const actionData = useActionData<typeof resultsAction>()
+  const [sendState, setSendState] = useState<SendState>('unsent')
 
-  if (!result.success) {
-    return { error: zod.prettifyError(result.error), ok: false as const }
-  }
+  const actionResponse = actionData?.ok ? actionData.data : actionData?.error
 
-  return { data: result.data, ok: true as const }
-}
-
-export function Component() {
-  const actionData = useActionData<typeof action>()
-
-  if (!actionData || !actionData?.ok) {
+  if (!actionResponse || typeof actionResponse === 'string') {
     return (
       <>
-        {actionData?.error ? (
+        {actionResponse ? (
           <div className="load-error">
             <p>Error: Unable to load ranker results</p>
-            <p>{actionData.error}</p>
+            <p>{actionResponse}</p>
           </div>
         ) : (
           <p>
@@ -53,10 +51,34 @@ export function Component() {
     )
   }
 
-  const results = actionData.data
+  const sendResults = async () => {
+    const fetchOptions = {
+      body: JSON.stringify(actionResponse),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    }
+
+    const response = await fetch(APPS_SCRIPT_ENDPOINT, fetchOptions)
+
+    if (!response.ok) {
+      setSendState('error')
+      return
+    }
+
+    const result = endpointResponse.safeParse(await response.json())
+
+    if (!result.success || result.data.result === 'error') {
+      setSendState('error')
+      return
+    }
+
+    setSendState('sent')
+  }
 
   const saveResults = () => {
-    const data = JSON.stringify(results)
+    const data = JSON.stringify(actionResponse)
     const blob = new Blob([data], { type: 'application/json' })
     const href = URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -74,12 +96,23 @@ export function Component() {
 
   return (
     <>
-      <button onClick={saveResults} type="button">
-        Save Results
-      </button>
+      <div>
+        <button
+          disabled={sendState === 'sent'}
+          onClick={sendResults}
+          type="button"
+        >
+          {sendState !== 'error'
+            ? 'Send Results'
+            : 'Error sending results, try again'}
+        </button>
+        <button onClick={saveResults} type="button">
+          Save Results
+        </button>
+      </div>
 
       <table>
-        <caption>Result of ranking: {results.title}</caption>
+        <caption>Result of ranking: {actionResponse.title}</caption>
         <thead>
           <tr>
             {TABLE_HEADINGS.map((heading) => (
@@ -90,7 +123,7 @@ export function Component() {
           </tr>
         </thead>
         <tbody>
-          {results.players.map((player, index) => (
+          {actionResponse.players.map((player, index) => (
             <tr key={player.name}>
               <th scope="row">
                 {player.image ? (
