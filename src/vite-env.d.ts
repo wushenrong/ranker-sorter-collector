@@ -5,3 +5,15 @@
  */
 /// <reference types="vite/client" />
 /// <reference types="@total-typescript/ts-reset" />
+
+interface ViteTypeOptions {
+  strictImportMetaEnv: unknown
+}
+
+interface ImportMetaEnv {
+  readonly VITE_APPS_SCRIPT_ENDPOINT: string
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}

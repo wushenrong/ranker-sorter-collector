@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 
+import { useState } from 'react'
 import { useSubmit } from 'react-router'
 
 import exampleRanker from '~/example-ranker.json'
@@ -11,11 +12,19 @@ import exampleRanker from '~/example-ranker.json'
 export function Creator() {
   const submit = useSubmit()
 
+  const [isStarting, setIsStarting] = useState(false)
+
   const startRanker = () => {
+    if (isStarting) {
+      return
+    }
+
+    setIsStarting(true)
+
     submit(JSON.stringify(exampleRanker), {
       action: '/ranker',
       encType: 'application/json',
-      method: 'post',
+      method: 'POST',
       replace: true,
     })
   }
@@ -28,7 +37,7 @@ export function Creator() {
         computer. Do not reload the browser while completing the ranker. Do not
         forget to save your results after completing the ranker!
       </p>
-      <button onClick={startRanker} type="button">
+      <button disabled={isStarting} onClick={startRanker} type="button">
         Start Ranker
       </button>
     </>

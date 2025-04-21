@@ -10,10 +10,7 @@ import { Link, useActionData } from 'react-router'
 import { resultsAction } from '~/actions'
 import { endpointResponse } from '~/schemas'
 
-type SendState = 'unsent' | 'error' | 'sent'
-
-const APPS_SCRIPT_ENDPOINT =
-  'https://script.google.com/macros/s/AKfycbwmOAgr96l3z7_mQOdCor048W8Ets9JtHQGDixBXR_PdXnqlaVkarx-L3GpGtCPGJFc/exec'
+type SendState = 'unsent' | 'sending' | 'error' | 'sent'
 
 const TABLE_HEADINGS = [
   'Player',
@@ -26,6 +23,7 @@ const TABLE_HEADINGS = [
 
 export function Results() {
   const actionData = useActionData<typeof resultsAction>()
+
   const [sendState, setSendState] = useState<SendState>('unsent')
 
   const actionResponse = actionData?.ok ? actionData.data : actionData?.error
@@ -52,15 +50,20 @@ export function Results() {
   }
 
   const sendResults = async () => {
-    const fetchOptions = {
-      body: JSON.stringify(actionResponse),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
+    if (sendState === 'sent' || sendState === 'sending') {
+      return
     }
 
-    const response = await fetch(APPS_SCRIPT_ENDPOINT, fetchOptions)
+    setSendState('sending')
+
+    const response = await fetch(import.meta.env.VITE_APPS_SCRIPT_ENDPOINT, {
+      body: JSON.stringify(actionResponse),
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      },
+      method: 'POST',
+      redirect: 'follow',
+    })
 
     if (!response.ok) {
       setSendState('error')
@@ -98,13 +101,17 @@ export function Results() {
     <>
       <div>
         <button
-          disabled={sendState === 'sent'}
+          disabled={sendState === 'sent' || sendState === 'sending'}
           onClick={sendResults}
           type="button"
         >
-          {sendState !== 'error'
-            ? 'Send Results'
-            : 'Error sending results, try again'}
+          {sendState === 'sent'
+            ? 'Results Sent'
+            : sendState === 'error'
+              ? 'Error sending results. Click to try again.'
+              : sendState === 'sending'
+                ? 'Sending Results'
+                : 'Send Results'}
         </button>
         <button onClick={saveResults} type="button">
           Save Results
