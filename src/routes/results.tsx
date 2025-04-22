@@ -144,7 +144,7 @@ export function Results() {
                   player.name
                 )}
               </th>
-              <td>{index + 1}</td>
+              <td>{player.rank}</td>
               <td>{player.elo}</td>
               <td>{player.wins}</td>
               <td>{player.losses}</td>

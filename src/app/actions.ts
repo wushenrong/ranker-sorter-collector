@@ -2,7 +2,7 @@ import * as zod from '@zod/mini'
 import { ActionFunctionArgs } from 'react-router'
 
 import { shuffleArray } from './elosystem'
-import { customRanker, rankerResults } from './schemas'
+import { customRanker, results } from './schemas'
 
 export async function rankerAction({ request }: ActionFunctionArgs) {
   const rankerData = await request.json()
@@ -22,7 +22,7 @@ export async function rankerAction({ request }: ActionFunctionArgs) {
 
 export async function resultsAction({ request }: ActionFunctionArgs) {
   const rankerResultsData = await request.json()
-  const result = rankerResults.safeParse(rankerResultsData)
+  const result = results.safeParse(rankerResultsData)
 
   if (!result.success) {
     return { error: zod.prettifyError(result.error), ok: false as const }
