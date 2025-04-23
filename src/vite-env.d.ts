@@ -7,13 +7,13 @@
 /// <reference types="@total-typescript/ts-reset" />
 
 interface ViteTypeOptions {
-  strictImportMetaEnv: unknown
+  strictImportMetaEnv: unknown;
 }
 
 interface ImportMetaEnv {
-  readonly VITE_DATABASE_ENDPOINT: string
+  readonly VITE_DATABASE_ENDPOINT: string;
 }
 
 interface ImportMeta {
-  readonly env: ImportMetaEnv
+  readonly env: ImportMetaEnv;
 }

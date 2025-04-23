@@ -4,30 +4,30 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { useState } from 'react'
-import { useSubmit } from 'react-router'
+import { useState } from "react";
+import { useSubmit } from "react-router";
 
-import exampleRanker from '~/example-ranker.json'
+import exampleRanker from "~/example-ranker.json";
 
 export function Creator() {
-  const submit = useSubmit()
+  const submit = useSubmit();
 
-  const [isStarting, setIsStarting] = useState(false)
+  const [isStarting, setIsStarting] = useState(false);
 
   const startRanker = () => {
     if (isStarting) {
-      return
+      return;
     }
 
-    setIsStarting(true)
+    setIsStarting(true);
 
     submit(JSON.stringify(exampleRanker), {
-      action: '/ranker',
-      encType: 'application/json',
-      method: 'POST',
+      action: "/ranker",
+      encType: "application/json",
+      method: "POST",
       replace: true,
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -41,5 +41,5 @@ export function Creator() {
         Start Ranker
       </button>
     </>
-  )
+  );
 }
