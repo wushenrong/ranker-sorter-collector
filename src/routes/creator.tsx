@@ -38,7 +38,7 @@ export function Creator() {
         forget to save your results after completing the ranker!
       </p>
       <button disabled={isStarting} onClick={startRanker} type="button">
-        Start Ranker
+        {isStarting ? "Starting ranker..." : "Start Ranker"}
       </button>
     </>
   );
