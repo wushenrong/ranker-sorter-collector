@@ -130,7 +130,7 @@ export function Results() {
           </tr>
         </thead>
         <tbody>
-          {actionResponse.players.map((player, index) => (
+          {actionResponse.players.map((player) => (
             <tr key={player.name}>
               <th scope="row">
                 {player.image ? (
